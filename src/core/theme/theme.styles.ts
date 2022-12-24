@@ -1,4 +1,13 @@
-export const theme = {
+type themeOptions = {
+  [key: string]: string
+}
+
+interface ITheme {
+  light: themeOptions
+  dark: themeOptions
+}
+
+export const theme: ITheme = {
   light: {
     header: '#373b53',
     background: '#f8f8fb',
@@ -10,6 +19,8 @@ export const theme = {
     selago: '#dfe3fa',
     mirage: '#1E2139',
     white: '#fff',
+    shipCove: '#7E88C3',
+    coral: '#EC5757',
   },
   dark: {},
 }

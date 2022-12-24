@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { theme } from 'core/theme'
 
 export const ButtonStyles = styled.button<{
-  backgroundColor: keyof typeof theme.light
+  backgroundColor: string
 }>`
   border: none;
   font-family: 'Spartan', sans-serif;
@@ -15,4 +15,12 @@ export const ButtonStyles = styled.button<{
   letter-spacing: -0.25px;
   background-color: ${(props) =>
     props.backgroundColor && theme.light[props.backgroundColor]};
+  cursor: pointer;
+  color: ${theme.light.white};
+  transition: opacity 0.2s;
+  width: 100%;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `
