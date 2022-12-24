@@ -3,12 +3,10 @@
   "tabWidth": 2,
   "semi": false,
   "singleQuote": false,
+  "printWidth": 120,
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
+      "files": ["*.ts", "*.tsx"],
       "options": {
         "singleQuote": true
       }
