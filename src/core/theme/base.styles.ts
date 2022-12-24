@@ -22,4 +22,8 @@ export const BaseTheme = createGlobalStyle`
     background-color: ${theme.light.background};
     overflow-y: hidden;
   }
+
+  a {
+    text-decoration: none;
+  }
 `
