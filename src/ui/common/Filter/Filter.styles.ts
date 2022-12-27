@@ -29,6 +29,7 @@ export const DropdownContent = styled.div<{ isVisible: boolean }>`
   top: 200%;
   width: 192px;
   height: 128px;
+  z-index: 5;
   background: #ffffff;
   box-shadow: 0 10px 20px rgba(72, 84, 159, 0.25);
   border-radius: 8px;

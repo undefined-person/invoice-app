@@ -21,6 +21,9 @@ export const theme: ITheme = {
     white: '#fff',
     shipCove: '#7E88C3',
     coral: '#EC5757',
+    steel: '#858bb2',
+    mint: '#33D69F',
+    peach: '#FF8F00',
   },
   dark: {},
 }
