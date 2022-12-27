@@ -8,6 +8,7 @@ export const refreshApi = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 })
 
 export const api = axios.create({

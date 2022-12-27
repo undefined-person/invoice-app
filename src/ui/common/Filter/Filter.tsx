@@ -14,9 +14,10 @@ interface FilterProps {
   options: Array<FilterOption>
   defaultValue?: string
   type: 'select' | 'dropdown'
+  onChange: <T>(value: T) => void
 }
 
-export const Filter: FC<FilterProps> = ({ defaultValue, options, placeholder, type }) => {
+export const Filter: FC<FilterProps> = ({ defaultValue, options, placeholder, type, onChange }) => {
   const [isActive, setActive] = useState<boolean>(false)
 
   if (type === 'select') {
@@ -37,8 +38,8 @@ export const Filter: FC<FilterProps> = ({ defaultValue, options, placeholder, ty
         </DropdownButton>
         <DropdownContent isVisible={isActive}>
           {options.map(({ label, value }) => (
-            <DropdownItem>
-              <Checkbox type="checkbox" id={value} value={value} />
+            <DropdownItem key={value}>
+              <Checkbox onChange={(e) => onChange(e)} type="checkbox" id={value} value={value} />
               <label htmlFor={value}>{label}</label>
             </DropdownItem>
           ))}

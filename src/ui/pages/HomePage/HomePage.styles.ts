@@ -22,3 +22,22 @@ export const TotalInvoices = styled.p`
   color: ${theme.light.baliHai};
   margin-top: 8px;
 `
+
+export const InvoicesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const AddInvoice = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  background-color: ${theme.light.white};
+  color: ${theme.light.primary};
+  margin-right: 16px;
+  font-size: 22px;
+  font-weight: 700;
+`
