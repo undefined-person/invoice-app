@@ -28,10 +28,15 @@ export const HeaderLine = styled.hr`
   margin: 32px 0 24px;
 `
 
-export const Avatar = styled.img`
+export const Avatar = styled.figure`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   height: 40px;
   width: 40px;
+  background-color: ${theme.light.primary};
+  color: ${theme.light.white};
 `
 
 export const ThemeButton = styled.button`
