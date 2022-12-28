@@ -2,7 +2,7 @@ import { useNavigate, useRoutes } from 'react-router-dom'
 import { useEffect } from 'react'
 
 import { ROUTES } from 'core/constants'
-import { SignUp, SignIn, HomePage } from 'ui/pages'
+import { SignUp, SignIn, HomePage, Settings } from 'ui/pages'
 import { useAppDispatch, useAppSelector } from 'core/hooks'
 import { checkAuth } from 'core/store/user'
 
@@ -29,6 +29,7 @@ function App() {
     { path: ROUTES.home, element: <HomePage /> },
     { path: ROUTES.signUp, element: <SignUp /> },
     { path: ROUTES.signIn, element: <SignIn /> },
+    { path: ROUTES.settings, element: <Settings /> },
   ])
 
   return routes

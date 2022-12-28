@@ -37,10 +37,41 @@ export const Avatar = styled.figure`
   width: 40px;
   background-color: ${theme.light.primary};
   color: ${theme.light.white};
+  cursor: pointer;
+`
+
+export const AvatarContainer = styled.div`
+  position: relative;
 `
 
 export const ThemeButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
+`
+
+export const UserPopup = styled.div`
+  position: absolute;
+  display: block;
+  top: -30px;
+  right: -80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${theme.light.white};
+  border-radius: 8px;
+  padding: 16px 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  row-gap: 8px;
+
+  button {
+    background: none;
+    border: none;
+    color: ${theme.light.heading};
+    cursor: pointer;
+
+    &:hover {
+      color: ${theme.light.primary};
+    }
+  }
 `
