@@ -3,7 +3,6 @@ import { theme } from 'core/theme'
 import styled from 'styled-components'
 
 export const Label = styled.label`
-  font-family: 'Spartan';
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
@@ -13,7 +12,6 @@ export const Label = styled.label`
 export const Input = styled.input`
   border-radius: 4px;
   padding: 17px 20px;
-  font-family: 'Spartan';
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
