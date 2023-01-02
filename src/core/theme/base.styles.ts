@@ -4,6 +4,7 @@ import reset from 'styled-reset'
 import { theme } from './theme.styles'
 
 export const BaseTheme = createGlobalStyle`
+
   ${reset}
   
   * {
@@ -17,7 +18,7 @@ export const BaseTheme = createGlobalStyle`
   body {
     width: 100%;
     height: 100vh;
-    font-family: 'Spartan', sans-serif;
+    font-family: 'OpenSans';
     color: ${theme.light.heading};
     background-color: ${theme.light.background};
     overflow-y: hidden;
@@ -25,5 +26,13 @@ export const BaseTheme = createGlobalStyle`
 
   a {
     text-decoration: none;
+  }
+
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: 'OpenSans';
+    color: ${theme.light.heading};
   }
 `
