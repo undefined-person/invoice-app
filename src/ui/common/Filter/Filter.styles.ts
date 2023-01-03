@@ -9,7 +9,6 @@ export const Dropdown = styled.div`
 export const DropdownButton = styled.button`
   background: none;
   border: none;
-  font-family: 'Spartan', sans-serif;
   display: flex;
   align-items: center;
   gap: 16px;

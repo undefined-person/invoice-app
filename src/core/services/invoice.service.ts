@@ -1,24 +1,19 @@
-import { IInvoiceList, IInvoicesQuery } from './../models/invoice.interface'
+import { api } from 'core/utils'
+import { IInvoiceList, IInvoicesQuery, InvoiceInfo } from 'core/models'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { ACCESS_TOKEN } from 'core/constants'
+
+const baseQuery = (config: any) => {
+  return api(config)
+}
 
 export const invoiceApi = createApi({
   reducerPath: 'invoiceApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_API_URL,
-    prepareHeaders: (headers: Headers) => {
-      const token = localStorage.getItem(ACCESS_TOKEN)
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`)
-      }
-      return headers
-    },
-  }),
+  baseQuery,
   endpoints: (builder) => ({
     getInvoices: builder.query<IInvoiceList, IInvoicesQuery>({
       query: ({ status, limit, offset }) => ({ url: '/invoice', params: { status, limit, offset } }),
     }),
-    getInvoice: builder.query({
+    getInvoice: builder.query<InvoiceInfo, string>({
       query: (id: string) => `/invoice/${id}`,
     }),
     createInvoice: builder.mutation({

@@ -2,9 +2,13 @@ import React, { FC } from 'react'
 import { ButtonStyles } from './Button.styles'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  color: 'primary' | 'red' | 'grey'
+  color: 'primary' | 'coral' | 'sky'
 }
 
-export const Button: FC<ButtonProps> = ({ children, color }) => {
-  return <ButtonStyles backgroundColor={color}>{children}</ButtonStyles>
+export const Button: FC<ButtonProps> = ({ children, color, onClick, disabled }) => {
+  return (
+    <ButtonStyles onClick={onClick} disabled={disabled} backgroundColor={color}>
+      {children}
+    </ButtonStyles>
+  )
 }
