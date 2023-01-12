@@ -10,6 +10,8 @@ const handleBackgroundColor = (backgroundColor: string) => {
       return theme.light.lightViolet
     case 'coral':
       return '#FF9797'
+    case 'header':
+      return theme.light.heading
     default:
       return theme.light.lightViolet
   }
@@ -17,6 +19,7 @@ const handleBackgroundColor = (backgroundColor: string) => {
 
 export const ButtonStyles = styled.button<{
   backgroundColor: string
+  isFullWidth?: boolean
 }>`
   display: flex;
   justify-content: center;
@@ -32,9 +35,10 @@ export const ButtonStyles = styled.button<{
   cursor: pointer;
   color: ${(props) => (props.backgroundColor === 'sky' ? theme.light.shipCove : theme.light.white)};
   transition: opacity 0.2s;
-  width: 100%;
+  width: ${(props) => (props.isFullWidth ? '100%' : 'min-content')};
   padding: 17px 24px;
   transition: background-color 0.25s;
+  white-space: nowrap;
 
   &:hover {
     background-color: ${(props) => props.backgroundColor && handleBackgroundColor(props.backgroundColor)};
