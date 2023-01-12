@@ -5,6 +5,7 @@ import { ACCESS_TOKEN, ROUTES } from 'core/constants'
 import { SignUp, SignIn, HomePage, Settings, Invoice } from 'ui/pages'
 import { useAppDispatch, useAppSelector } from 'core/hooks'
 import { checkAuth } from 'core/store/user'
+import { Modal } from 'ui/common'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -23,7 +24,12 @@ function App() {
     { path: ROUTES.invoice, element: <Invoice /> },
   ])
 
-  return routes
+  return (
+    <>
+      {routes}
+      <Modal />
+    </>
+  )
 }
 
 export default App

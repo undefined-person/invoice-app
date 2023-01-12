@@ -1,10 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import { invoiceApi } from 'core/services'
+
 import userSlice from './user/user.slice'
+import modalSlice from './modal/modal.slice'
 
 const rootReducer = combineReducers({
   user: userSlice,
+  modal: modalSlice,
   [invoiceApi.reducerPath]: invoiceApi.reducer,
 })
 
