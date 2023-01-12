@@ -1,8 +1,11 @@
 import { useParams, useNavigate } from 'react-router-dom'
 
+import { invoiceApi } from 'core/services'
+import { useAppDispatch } from 'core/hooks'
+import { ModalType } from 'core/models'
 import { Button, Container, InvoiceStatus, Paragraph } from 'ui/common'
 import { DashboardLayout } from 'ui/layouts'
-import { invoiceApi } from 'core/services'
+import { openModal } from 'core/store/modal/modal.slice'
 
 import Arrow from 'assets/images/icons/icon-arrow.svg'
 
@@ -29,8 +32,17 @@ import {
 export const Invoice = () => {
   const { orderId } = useParams()
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  const { data } = invoiceApi.useGetInvoiceQuery(orderId!)
+  const [markAsPaid] = invoiceApi.useMarkInvoiceAsPaidMutation()
 
-  const { data } = invoiceApi.useGetInvoiceQuery(orderId)
+  const handleDelete = () => {
+    dispatch(openModal({ modalType: ModalType.DELETE, modalProps: { id: data?.id, orderId } }))
+  }
+
+  const handleMarkAsPaid = () => {
+    markAsPaid(data.id)
+  }
 
   return (
     <DashboardLayout>
@@ -49,8 +61,10 @@ export const Invoice = () => {
                 <Button color="sky" disabled={data.status === 'paid'}>
                   Edit
                 </Button>
-                <Button color="coral">Delete</Button>
-                <Button color="primary" disabled={data.status === 'paid'}>
+                <Button color="coral" onClick={handleDelete}>
+                  Delete
+                </Button>
+                <Button color="primary" onClick={handleMarkAsPaid} disabled={data.status === 'paid'}>
                   Mark as Paid
                 </Button>
               </InvoiceControl>
