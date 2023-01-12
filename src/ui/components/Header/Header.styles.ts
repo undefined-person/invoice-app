@@ -11,6 +11,7 @@ export const HeaderWrapper = styled.header`
   background-color: ${theme.light.header};
   border-radius: 0 20px 20px 0;
   padding-bottom: 24px;
+  z-index: 1001;
 `
 
 export const HeaderBottom = styled.div`
