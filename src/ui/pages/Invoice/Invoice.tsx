@@ -28,6 +28,7 @@ import {
   Status,
   TopContainer,
 } from './Invoice.styles'
+import { dateFormatter } from 'core/utils'
 
 export const Invoice = () => {
   const { orderId } = useParams()
@@ -84,8 +85,8 @@ export const Invoice = () => {
               </InvoiceInfoTop>
               <InvoiceInfoCenter>
                 <InvoiceDate>
-                  <InvoiceGroup title="Invoice Date" subtitle="21 Aug 2021" />
-                  <InvoiceGroup title="Payment Due" subtitle="21 Aug 2021" />
+                  <InvoiceGroup title="Invoice Date" subtitle={dateFormatter(data.createdAt)} />
+                  <InvoiceGroup title="Payment Due" subtitle={dateFormatter(data.paymentDue)} />
                 </InvoiceDate>
                 <div>
                   <InvoiceGroup title="Bill To" subtitle={data.clientName} />
