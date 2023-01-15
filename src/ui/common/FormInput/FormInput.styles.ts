@@ -9,7 +9,7 @@ export const Label = styled.label`
   letter-spacing: -0.25px;
 `
 
-export const Input = styled.input`
+export const Input = styled.input<{ isError?: boolean }>`
   border-radius: 4px;
   padding: 17px 20px;
   font-weight: 700;
@@ -20,12 +20,16 @@ export const Input = styled.input`
   color: ${theme.light.heading};
   outline: none;
 
+  &:not(:focus) {
+    border: ${(props) => `1px solid ${props.isError ? theme.light.coral : theme.light.selago}`};
+  }
+
   &:focus {
     border: 1px solid ${theme.light.lightViolet};
   }
 `
 
-export const InputGroup = styled.div<{ isError: boolean }>`
+export const InputGroup = styled.div<{ isError?: boolean }>`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
