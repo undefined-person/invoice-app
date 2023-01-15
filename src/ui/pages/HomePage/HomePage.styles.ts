@@ -26,6 +26,7 @@ export const TotalInvoices = styled.p`
 export const InvoicesContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding-bottom: 65px;
 `
 
 export const AddInvoice = styled.span`
