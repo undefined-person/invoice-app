@@ -10,10 +10,11 @@ import 'react-datepicker/dist/react-datepicker.css'
 interface DatePickerProps {
   label: string
   onDateChange: (date: Date) => void
+  defaultValue?: Date
 }
 
-export const DateSelector: FC<DatePickerProps> = ({ label, onDateChange }) => {
-  const [startDate, setStartDate] = useState(new Date())
+export const DateSelector: FC<DatePickerProps> = ({ label, onDateChange, defaultValue }) => {
+  const [startDate, setStartDate] = useState(defaultValue ?? new Date())
   return (
     <InputGroup>
       <Label>{label}</Label>
