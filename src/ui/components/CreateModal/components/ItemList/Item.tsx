@@ -26,18 +26,24 @@ export const Item: FC<ItemProps> = ({ item, errors, register, onChange, index, h
   return (
     <ItemContainer>
       <ItemListBody>
-        <Input type="text" id="name" {...register(`name_${id}`)} value={name} onChange={(e) => handleInputChange(e)} />
+        <Input
+          type="text"
+          id="name"
+          {...register(`name_${index}`)}
+          value={name}
+          onChange={(e) => handleInputChange(e)}
+        />
         <Input
           type="number"
           id="price"
-          {...register(`price_${id}`)}
+          {...register(`price_${index}`)}
           value={price}
           onChange={(e) => handleInputChange(e)}
         />
         <Input
           type="number"
           id="quantity"
-          {...register(`quantity_${id}`)}
+          {...register(`quantity_${index}`)}
           value={quantity}
           onChange={(e) => handleInputChange(e)}
         />
