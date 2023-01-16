@@ -22,7 +22,7 @@ export const Modal = () => {
     return {
       [ModalType.DELETE]: <DeleteModal />,
       [ModalType.CREATE]: <CreateModal />,
-      [ModalType.EDIT]: <CreateModal />,
+      [ModalType.EDIT]: <EditModal invoice={modalProps} />,
     }
   }, [modalProps])
 

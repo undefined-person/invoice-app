@@ -52,7 +52,7 @@ export const ItemList: FC<ItemListProps> = ({ items, setItems, register, errors 
       </ItemListHeader>
       {items.map((item, index) => (
         <Item
-          key={item.id}
+          key={index}
           index={index}
           item={item}
           errors={errors}
