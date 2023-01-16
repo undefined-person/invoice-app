@@ -11,15 +11,17 @@ export const BaseTheme = createGlobalStyle`
     box-sizing: border-box;
   }
   
-  html, body {
+  html {
     height: 100%;
   }
   
   body {
     width: 100%;
+    height: 100vh;
     font-family: 'OpenSans', sans-serif;
     color: ${theme.light.heading};
     background-color: ${theme.light.background};
+    overflow-y: hidden;
   }
 
   a {
