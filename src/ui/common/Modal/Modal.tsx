@@ -7,9 +7,10 @@ import { CreateModal, DeleteModal } from 'ui/components'
 
 import { Overlay } from './Modal.styles'
 import { closeModal } from 'core/store/modal/modal.slice'
+import { EditModal } from 'ui/components/EditModal/EditModal'
 
 export const Modal = () => {
-  const { isOpen, modalType } = useAppSelector((state) => state.modal)
+  const { isOpen, modalType, modalProps } = useAppSelector((state) => state.modal)
   const dispatch = useAppDispatch()
   const modalPlaceholderElement = document.getElementById('modal')!
 
@@ -23,7 +24,7 @@ export const Modal = () => {
       [ModalType.CREATE]: <CreateModal />,
       [ModalType.EDIT]: <CreateModal />,
     }
-  }, [])
+  }, [modalProps])
 
   return (
     <>
