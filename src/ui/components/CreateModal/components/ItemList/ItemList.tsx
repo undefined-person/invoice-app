@@ -61,7 +61,7 @@ export const ItemList: FC<ItemListProps> = ({ items, setItems, register, errors 
           handleDelete={handleDeleteItem}
         />
       ))}
-      <Button type="button" color="sky" onClick={handleAddItem}>
+      <Button isFullWidth type="button" color="sky" onClick={handleAddItem}>
         + Add New Item
       </Button>
     </ItemListContainer>
