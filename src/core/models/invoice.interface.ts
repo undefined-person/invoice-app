@@ -20,7 +20,7 @@ export interface IInvoicesQuery {
   offset: number
 }
 
-export interface ClientAddress {
+export interface IClientAddress {
   city: string
   street: string
   country: string
@@ -45,8 +45,8 @@ export interface InvoiceInfo {
   clientName: string
   clientEmail: string
   status: IInvoiceStatus
-  senderAddress: ClientAddress
-  clientAddress: ClientAddress
+  senderAddress: IClientAddress
+  clientAddress: IClientAddress
   items: IInvoiceItem[]
   total: string
 }

@@ -74,3 +74,7 @@ export const CreateModalButtonsRight = styled.div`
   display: flex;
   column-gap: 8px;
 `
+
+export const EditModalButtons = styled(CreateModalButtons)`
+  justify-content: flex-end;
+`

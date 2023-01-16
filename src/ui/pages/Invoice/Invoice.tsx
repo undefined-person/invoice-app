@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { invoiceApi } from 'core/services'
 import { useAppDispatch } from 'core/hooks'
 import { ModalType } from 'core/models'
+import { dateFormatter } from 'core/utils'
 import { Button, Container, InvoiceStatus, Paragraph } from 'ui/common'
 import { DashboardLayout } from 'ui/layouts'
 import { openModal } from 'core/store/modal/modal.slice'
@@ -28,7 +29,6 @@ import {
   Status,
   TopContainer,
 } from './Invoice.styles'
-import { dateFormatter } from 'core/utils'
 
 export const Invoice = () => {
   const { orderId } = useParams()
@@ -45,6 +45,10 @@ export const Invoice = () => {
     markAsPaid(data.id)
   }
 
+  const handleEdit = () => {
+    dispatch(openModal({ modalType: ModalType.EDIT, modalProps: data }))
+  }
+
   return (
     <DashboardLayout>
       <Container>
@@ -59,7 +63,7 @@ export const Invoice = () => {
                 <InvoiceStatus status={data.status}>{data.status}</InvoiceStatus>
               </Status>
               <InvoiceControl>
-                <Button color="sky" disabled={data.status === 'paid'}>
+                <Button color="sky" disabled={data.status === 'paid'} onClick={handleEdit}>
                   Edit
                 </Button>
                 <Button color="coral" onClick={handleDelete}>
