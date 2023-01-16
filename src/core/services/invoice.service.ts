@@ -42,9 +42,9 @@ export const invoiceApi = createApi({
       invalidatesTags: ['Invoice'],
     }),
     updateInvoice: builder.mutation({
-      query: (body: any) => ({
-        url: `/invoice/${body.id}`,
-        method: 'PUT',
+      query: (body: InvoiceInfo) => ({
+        url: `/invoice`,
+        method: 'PATCH',
         body,
       }),
       invalidatesTags: ['Invoice'],
