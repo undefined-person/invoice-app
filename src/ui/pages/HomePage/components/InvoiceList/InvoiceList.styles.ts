@@ -8,6 +8,7 @@ export const InvoicesList = styled.div`
   flex-direction: column;
   row-gap: 16px;
   margin-top: 65px;
+  overflow-y: auto;
 `
 
 export const InvoiceItemContainer = styled.div`
