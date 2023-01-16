@@ -3,10 +3,15 @@ import styled from 'styled-components'
 import { theme } from 'core/theme'
 
 export const ContentHeader = styled.div`
-  display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  width: 100%;
+`
+
+export const ContentHeaderRight = styled.div`
+  display: flex;
+  column-gap: 40px;
+  align-items: center;
 `
 
 export const ContentTitleBlock = styled.div`
@@ -26,6 +31,7 @@ export const TotalInvoices = styled.p`
 export const InvoicesContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   padding-bottom: 65px;
 `
 

@@ -7,7 +7,14 @@ import { invoiceApi } from 'core/services'
 
 import { InvoiceList } from './components'
 
-import { AddInvoice, ContentHeader, ContentTitleBlock, InvoicesContainer, TotalInvoices } from './HomePage.styles'
+import {
+  AddInvoice,
+  ContentHeader,
+  ContentHeaderRight,
+  ContentTitleBlock,
+  InvoicesContainer,
+  TotalInvoices,
+} from './HomePage.styles'
 import { useAppDispatch } from 'core/hooks'
 import { openModal } from 'core/store/modal/modal.slice'
 import { ModalType } from 'core/models'
@@ -47,11 +54,18 @@ export const HomePage = () => {
               <Title title="Invoices" size="large" />
               <TotalInvoices>{data?.count ? `There are ${data.count} total invoices` : 'No invoices'}</TotalInvoices>
             </ContentTitleBlock>
-            <Filter onChange={handleChange} placeholder="Filter by status" type="dropdown" options={dropdownOptions} />
-            <Button type="button" color="primary" onClick={handleAddInvoice}>
-              <AddInvoice>+</AddInvoice>
-              New Invoice
-            </Button>
+            <ContentHeaderRight>
+              <Filter
+                onChange={handleChange}
+                placeholder="Filter by status"
+                type="dropdown"
+                options={dropdownOptions}
+              />
+              <Button type="button" color="primary" onClick={handleAddInvoice}>
+                <AddInvoice>+</AddInvoice>
+                New Invoice
+              </Button>
+            </ContentHeaderRight>
           </ContentHeader>
           <InvoiceList invoices={data?.data} />
         </InvoicesContainer>

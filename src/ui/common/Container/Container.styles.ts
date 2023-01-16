@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-  max-width: 730px;
+  justify-content: center;
+  max-width: 880px;
   margin: 0 auto;
   max-height: 100vh;
-  padding-top: 72px;
+  padding: 72px 20px 0 130px;
 `
