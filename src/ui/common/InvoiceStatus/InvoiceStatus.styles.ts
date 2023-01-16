@@ -29,6 +29,7 @@ export const InvoiceStatus = styled.div<{ status: IInvoiceStatus }>`
   justify-content: center;
   align-items: center;
   column-gap: 8px;
+  padding: 13px 17px;
 
   &::after {
     content: '';

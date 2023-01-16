@@ -7,7 +7,7 @@ import { api } from 'core/utils'
 export const registration = createAsyncThunk('auth/signup', async (payload: IRegistrationPayload, thunkAPI) => {
   try {
     const { data } = await api.post<IUserResponse>('/auth/signup', payload)
-
+    window.location.replace('/')
     return data
   } catch (error) {
     return thunkAPI.rejectWithValue(error)
@@ -19,7 +19,7 @@ export const login = createAsyncThunk('/auth/signin', async (payload: ILoginPayl
     const { data } = await api.post<IUserResponse>('/auth/signin', payload)
 
     localStorage.setItem(ACCESS_TOKEN, data.accessToken)
-
+    window.location.replace('/')
     return data
   } catch (error) {
     return thunkAPI.rejectWithValue(error)

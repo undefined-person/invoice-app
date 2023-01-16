@@ -1,21 +1,15 @@
 import axios, { AxiosError } from 'axios'
 
-import { IUserResponse } from 'core/models'
 import { ACCESS_TOKEN } from 'core/constants'
-
-export const refreshApi = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  withCredentials: true,
-})
+import { IUserResponse } from 'core/models'
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  withCredentials: true,
+})
+
+const refreshApi = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
 })
 
@@ -25,15 +19,11 @@ const refreshAccessToken = async () => {
 }
 
 api.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem(ACCESS_TOKEN)
-
   if (!config.headers) {
     config.headers = {}
   }
 
-  if (accessToken) {
-    config.headers['Authorization'] = `Bearer ${accessToken}`
-  }
+  config.headers.Authorization = `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`
   return config
 })
 
@@ -46,7 +36,6 @@ api.interceptors.response.use(
         try {
           await refreshAccessToken()
         } catch (e) {
-          localStorage.clear()
           return Promise.reject(error)
         }
         config.__isRetryRequest = true

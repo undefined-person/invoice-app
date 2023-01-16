@@ -1,5 +1,5 @@
 import { FieldValues, useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -18,6 +18,7 @@ export const SignIn = () => {
   const { loading, error } = useAppSelector((state) => state.user)
 
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const validationSchema = yup.object().shape({
     email: yup.string().email('invalid email').required('cannot be empty'),
@@ -34,6 +35,7 @@ export const SignIn = () => {
 
   const submitForm = (data: FieldValues) => {
     dispatch(login(data as ILoginPayload))
+    // navigate(ROUTES.home)
   }
 
   return (

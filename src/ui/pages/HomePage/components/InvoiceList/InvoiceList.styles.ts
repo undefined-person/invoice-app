@@ -8,6 +8,7 @@ export const InvoicesList = styled.div`
   flex-direction: column;
   row-gap: 16px;
   margin-top: 65px;
+  overflow-y: auto;
 `
 
 export const InvoiceItemContainer = styled.div`
@@ -18,6 +19,7 @@ export const InvoiceItemContainer = styled.div`
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
   border-radius: 8px;
   padding: 25px;
+  cursor: pointer;
 
   ${InvoiceStatus} {
     width: 100%;

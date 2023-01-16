@@ -24,6 +24,7 @@ export const theme: ITheme = {
     steel: '#858bb2',
     mint: '#33D69F',
     peach: '#FF8F00',
+    sky: '#F9FAFE',
   },
   dark: {},
 }

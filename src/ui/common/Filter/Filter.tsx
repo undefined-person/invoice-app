@@ -1,32 +1,55 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 
 import Arrow from 'assets/images/icons/icon-arrow.svg'
 
-import { Checkbox, Dropdown, DropdownButton, DropdownContent, DropdownItem } from './Filter.styles'
+import {
+  Checkbox,
+  Dropdown,
+  DropdownButton,
+  DropdownContent,
+  DropdownItem,
+  Select,
+  SelectContainer,
+  SelectContent,
+  SelectItem,
+} from './Filter.styles'
 
-interface FilterOption {
+export interface FilterOption {
   label: string
-  value: string
+  value: string | number
 }
 
 interface FilterProps {
-  placeholder: string
+  placeholder?: string
   options: Array<FilterOption>
-  defaultValue?: string
+  value?: FilterOption
   type: 'select' | 'dropdown'
   onChange: <T>(value: T) => void
 }
 
-export const Filter: FC<FilterProps> = ({ defaultValue, options, placeholder, type, onChange }) => {
+export const Filter: FC<FilterProps> = ({ value, options, placeholder, type, onChange }) => {
   const [isActive, setActive] = useState<boolean>(false)
 
   if (type === 'select') {
     return (
-      <>
-        <DropdownButton>
-          {placeholder} <img src={Arrow} alt="" />
-        </DropdownButton>
-      </>
+      <SelectContainer>
+        <Select onClick={() => setActive(!isActive)}>
+          <span>{value?.label}</span> <img src={Arrow} alt="" />
+        </Select>
+        <SelectContent isVisible={isActive}>
+          {options.map(({ label, value }) => (
+            <SelectItem
+              onClick={() => {
+                onChange({ label, value })
+                setActive(false)
+              }}
+              key={value}
+            >
+              <span>{label}</span>
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </SelectContainer>
     )
   }
 

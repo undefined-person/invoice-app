@@ -8,9 +8,13 @@ import { invoiceApi } from 'core/services'
 import { InvoiceList } from './components'
 
 import { AddInvoice, ContentHeader, ContentTitleBlock, InvoicesContainer, TotalInvoices } from './HomePage.styles'
+import { useAppDispatch } from 'core/hooks'
+import { openModal } from 'core/store/modal/modal.slice'
+import { ModalType } from 'core/models'
 
 export const HomePage = () => {
   const [filter, setFilter] = useState<string>('')
+  const dispatch = useAppDispatch()
 
   const { data } = invoiceApi.useGetInvoicesQuery({ status: filter, limit: 10, offset: 0 })
 
@@ -30,17 +34,21 @@ export const HomePage = () => {
     setFilter(newValues)
   }
 
+  const handleAddInvoice = () => {
+    dispatch(openModal({ modalType: ModalType.CREATE }))
+  }
+
   return (
     <DashboardLayout>
       <Container>
         <InvoicesContainer>
           <ContentHeader>
             <ContentTitleBlock>
-              <Title title="Invoices" />
+              <Title title="Invoices" size="large" />
               <TotalInvoices>{data?.count ? `There are ${data.count} total invoices` : 'No invoices'}</TotalInvoices>
             </ContentTitleBlock>
             <Filter onChange={handleChange} placeholder="Filter by status" type="dropdown" options={dropdownOptions} />
-            <Button type="button" color="primary">
+            <Button type="button" color="primary" onClick={handleAddInvoice}>
               <AddInvoice>+</AddInvoice>
               New Invoice
             </Button>

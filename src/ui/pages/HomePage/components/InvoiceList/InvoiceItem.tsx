@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { IInvoiceListItem } from 'core/models'
 import { InvoiceStatus } from 'ui/common'
@@ -15,8 +16,16 @@ import {
 } from './InvoiceList.styles'
 
 export const InvoiceItem: FC<IInvoiceListItem> = ({ clientName, orderId, paymentDue, status, total }) => {
+  const navigate = useNavigate()
+
+  const handleInvoiceClick = () => {
+    navigate({
+      pathname: `/invoice/${orderId}`,
+    })
+  }
+
   return (
-    <InvoiceItemContainer>
+    <InvoiceItemContainer onClick={handleInvoiceClick}>
       <InvoiceId>
         <span>#</span>
         {orderId}

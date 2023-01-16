@@ -13,7 +13,7 @@ interface InvoiceListProps {
 }
 
 export const InvoiceList: FC<InvoiceListProps> = ({ invoices }) => {
-  if (invoices?.length > 0) {
+  if (invoices?.length !== 0) {
     return (
       <InvoicesList>
         {invoices?.map((invoice) => (

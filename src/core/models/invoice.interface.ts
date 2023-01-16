@@ -19,3 +19,38 @@ export interface IInvoicesQuery {
   limit: number
   offset: number
 }
+
+export interface IClientAddress {
+  city: string
+  street: string
+  country: string
+  postCode: string
+}
+
+export interface IInvoiceItem {
+  id: string
+  name: string
+  price: number
+  total: number
+  quantity: number
+}
+
+export interface InvoiceInfo {
+  id: number
+  orderId: string
+  createdAt: Date
+  paymentDue: Date
+  description: string
+  paymentTerms: number
+  clientName: string
+  clientEmail: string
+  status: IInvoiceStatus
+  senderAddress: IClientAddress
+  clientAddress: IClientAddress
+  items: IInvoiceItem[]
+  total: string
+}
+
+type InvoiceInfoUnwantedKeys = 'id' | 'orderId' | 'paymentDue'
+
+export type InvoiceDto = Omit<InvoiceInfo, InvoiceInfoUnwantedKeys>

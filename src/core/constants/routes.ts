@@ -4,4 +4,5 @@ export const ROUTES = {
   signIn: '/signin',
   restorePassword: '/restore-password',
   settings: '/settings',
+  invoice: '/invoice/:orderId',
 }

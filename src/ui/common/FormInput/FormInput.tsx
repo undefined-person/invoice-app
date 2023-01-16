@@ -9,16 +9,17 @@ interface FormInputProps {
   type: HTMLInputTypeAttribute
   register: UseFormRegister<FieldValues>
   errors: FieldValues
+  defaultValue?: string
 }
 
-export const FormInput: FC<FormInputProps> = ({ name, label, register, errors, type }) => {
+export const FormInput: FC<FormInputProps> = ({ name, label, register, errors, type, defaultValue }) => {
   return (
     <InputGroup isError={!!errors[name]}>
       <ErrorWrapper>
         <Label>{label}</Label>
         <Error>{errors[name]?.message}</Error>
       </ErrorWrapper>
-      <Input type={type} {...register(name)} />
+      <Input defaultValue={defaultValue} type={type} {...register(name)} />
     </InputGroup>
   )
 }
