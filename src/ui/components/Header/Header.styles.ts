@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { theme } from 'core/theme'
+import { LogoWrapper } from '../Logo/Logo.styles'
 
 export const HeaderWrapper = styled.header`
   position: fixed;
@@ -12,6 +13,21 @@ export const HeaderWrapper = styled.header`
   border-radius: 0 20px 20px 0;
   padding-bottom: 24px;
   z-index: 1001;
+
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    height: 80px;
+    border-radius: 0;
+    padding-right: 20px;
+
+    ${LogoWrapper} {
+      width: 80px;
+      height: 80px;
+    }
+  }
 `
 
 export const HeaderBottom = styled.div`
@@ -19,6 +35,11 @@ export const HeaderBottom = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: auto;
+
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    flex-direction: row;
+    align-items: center;
+  }
 `
 
 export const HeaderLine = styled.hr`
@@ -27,6 +48,13 @@ export const HeaderLine = styled.hr`
   height: 1px;
   border: none;
   margin: 32px 0 24px;
+
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    width: 1px;
+    height: 80px;
+    margin: 0;
+    margin: 0 24px;
+  }
 `
 
 export const Avatar = styled.figure`
@@ -39,6 +67,11 @@ export const Avatar = styled.figure`
   background-color: ${theme.light.primary};
   color: ${theme.light.white};
   cursor: pointer;
+
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    height: 32px;
+    width: 32px;
+  }
 `
 
 export const AvatarContainer = styled.div`

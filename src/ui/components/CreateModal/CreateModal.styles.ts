@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { theme } from 'core/theme'
+import { BackContainer } from 'ui/common/BackButton/BackButton.styles'
 
 export const CreateModalWrapper = styled.div`
   display: flex;
@@ -9,11 +10,31 @@ export const CreateModalWrapper = styled.div`
   z-index: 999;
   left: 0;
   top: 0;
-  width: 40vw;
+  width: 60vw;
   height: 100vh;
   background: ${theme.light.white};
   border-radius: 0px 20px 20px 0px;
   overflow-y: scroll;
+
+  @media screen and (min-width: ${theme.breakpoints.desktopXL}) {
+    width: 40vw;
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.desktopL}) {
+    width: 80vw;
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.desktop}) {
+    width: 95vw;
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    width: 90vw;
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    width: 100vw;
+  }
 `
 
 export const CreateModalContainer = styled.div`
@@ -22,6 +43,18 @@ export const CreateModalContainer = styled.div`
 
 export const CreateModalForm = styled.form`
   padding: 56px 56px 0 150px;
+
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    padding: 100px 56px 0 56px;
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    padding: 120px 24px 0 24px;
+
+    ${BackContainer} {
+      margin-bottom: 24px;
+    }
+  }
 `
 
 export const CreateModalTitle = styled.h2`
@@ -31,6 +64,10 @@ export const CreateModalTitle = styled.h2`
   color: ${theme.light.primary};
   margin-top: 48px;
   margin-bottom: 24px;
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    margin-top: 24px;
+  }
 `
 
 export const CreateModalGroup = styled.div`
@@ -44,6 +81,12 @@ export const DateContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 24px;
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 24px;
+  }
 `
 
 export const CreateModalButtons = styled.div`
@@ -67,6 +110,13 @@ export const CreateModalButtons = styled.div`
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.1) 100%);
     z-index: -5;
     pointer-events: none;
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    padding: 31px 56px 31px 56px;
+  }
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    padding: 31px 24px 31px 24px;
   }
 `
 

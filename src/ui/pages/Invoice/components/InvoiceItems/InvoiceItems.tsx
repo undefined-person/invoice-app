@@ -1,6 +1,10 @@
 import { FC } from 'react'
 
 import { IInvoiceItem } from 'core/models'
+import { useWindowResize } from 'core/hooks'
+import { resolutions } from 'core/constants'
+
+import { InvoiceItem } from './InvoiceItem/InvoiceItem'
 
 import {
   InvoiceItemContainer,
@@ -11,7 +15,6 @@ import {
   InvoiceAmountDue,
   InvoiceTotal,
 } from './InvoiceItems.styles'
-import { InvoiceItem } from './InvoiceItem/InvoiceItem'
 
 interface InvoiceItemsProps {
   invoiceItems: IInvoiceItem[]
@@ -19,15 +22,19 @@ interface InvoiceItemsProps {
 }
 
 export const InvoiceItems: FC<InvoiceItemsProps> = ({ invoiceItems, total }) => {
+  const { width } = useWindowResize()
+
   return (
     <InvoiceItemWrapper>
       <InvoiceItemInfo>
-        <InvoiceItemContainer>
-          <InvoiceItemHeader>Item Name</InvoiceItemHeader>
-          <InvoiceItemHeader>QTY.</InvoiceItemHeader>
-          <InvoiceItemHeader>Price</InvoiceItemHeader>
-          <InvoiceItemHeader>Total</InvoiceItemHeader>
-        </InvoiceItemContainer>
+        {width > resolutions.mobile ? (
+          <InvoiceItemContainer>
+            <InvoiceItemHeader>Item Name</InvoiceItemHeader>
+            <InvoiceItemHeader>QTY.</InvoiceItemHeader>
+            <InvoiceItemHeader>Price</InvoiceItemHeader>
+            <InvoiceItemHeader>Total</InvoiceItemHeader>
+          </InvoiceItemContainer>
+        ) : null}
         {invoiceItems.map((item, index) => (
           <InvoiceItem key={index} {...item} />
         ))}

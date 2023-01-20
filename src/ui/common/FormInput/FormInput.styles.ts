@@ -6,7 +6,6 @@ export const Label = styled.label`
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
 `
 
 export const Input = styled.input<{ isError?: boolean }>`
@@ -15,7 +14,6 @@ export const Input = styled.input<{ isError?: boolean }>`
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
   width: 100%;
   color: ${theme.light.heading};
   outline: none;
@@ -54,6 +52,5 @@ export const Error = styled.span`
   font-weight: 600;
   font-size: 10px;
   line-height: 15px;
-  letter-spacing: -0.208333px;
   color: ${theme.light.coral};
 `

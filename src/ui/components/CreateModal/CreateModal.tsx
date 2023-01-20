@@ -4,7 +4,7 @@ import { FieldValues, useForm } from 'react-hook-form'
 import { IInvoiceItem, IInvoiceStatus } from 'core/models'
 import { generateId } from 'core/utils'
 import { invoiceApi } from 'core/services'
-import { Button, DateSelector, Filter, FilterOption, FormInput, InputGroup, Label, Title } from 'ui/common'
+import { BackButton, Button, DateSelector, Filter, FilterOption, FormInput, InputGroup, Label, Title } from 'ui/common'
 
 import { ClientAddress, ItemList } from './components'
 
@@ -18,6 +18,9 @@ import {
   CreateModalWrapper,
   DateContainer,
 } from './CreateModal.styles'
+import { useAppDispatch, useCloseModal, useWindowResize } from 'core/hooks'
+import { resolutions } from 'core/constants'
+import { closeModal } from 'core/store/modal/modal.slice'
 
 const options: FilterOption[] = [
   {
@@ -42,6 +45,8 @@ export const CreateModal = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [items, setItems] = useState<IInvoiceItem[]>([{ id: generateId(), name: '', price: 0, quantity: 0, total: 0 }])
   const [paymentTerms, setPaymentTerms] = useState(options[0])
+  const { width } = useWindowResize()
+  const { handleCloseModal } = useCloseModal()
 
   const [createInvoice] = invoiceApi.useCreateInvoiceMutation()
   const [draftInvoice] = invoiceApi.useDraftInvoiceMutation()
@@ -120,6 +125,7 @@ export const CreateModal = () => {
     <CreateModalWrapper>
       <CreateModalContainer>
         <CreateModalForm>
+          {width < resolutions.mobile ? <BackButton onClick={handleCloseModal} /> : null}
           <Title title="New Invoice" size="medium" />
           <CreateModalTitle>Bill From</CreateModalTitle>
           <ClientAddress errors={errors} register={register} type="sender" />

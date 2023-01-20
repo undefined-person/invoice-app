@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-import { InvoiceStatus } from 'ui/common'
 import { theme } from 'core/theme'
 
 export const InvoicesList = styled.div`
@@ -9,6 +8,10 @@ export const InvoicesList = styled.div`
   row-gap: 16px;
   margin-top: 65px;
   overflow-y: auto;
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    margin-top: 32px;
+  }
 `
 
 export const InvoiceItemContainer = styled.div`
@@ -21,16 +24,24 @@ export const InvoiceItemContainer = styled.div`
   padding: 25px;
   cursor: pointer;
 
-  ${InvoiceStatus} {
-    width: 100%;
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
   }
+`
+
+export const InvoiceItemMobileContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `
 
 export const InvoiceId = styled.div`
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
   color: ${theme.light.heading};
 
   span {
@@ -42,12 +53,15 @@ export const InvoiceDate = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
   color: ${theme.light.shipCove};
   justify-self: center;
 
   span {
     color: ${theme.light.baliHai};
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    margin-bottom: 8px;
   }
 `
 
@@ -55,7 +69,6 @@ export const InvoiceClient = styled.div`
   font-weight: 500;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
   color: ${theme.light.steel};
   justify-self: center;
 `
@@ -68,6 +81,10 @@ export const InvoiceTotal = styled.div`
   letter-spacing: -0.8px;
   color: ${theme.light.heading};
   justify-self: center;
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    text-align: left;
+  }
 `
 
 export const InvoiceActions = styled.button`
@@ -78,6 +95,10 @@ export const InvoiceActions = styled.button`
 
   img {
     transform: rotate(-90deg);
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    display: none;
   }
 `
 export const EmptyContainer = styled.div`
@@ -93,7 +114,6 @@ export const EmptyTitle = styled.h3`
   font-weight: 700;
   font-size: 20px;
   line-height: 22px;
-  letter-spacing: -0.625px;
   color: ${theme.light.heading};
   margin-top: 64px;
 `
@@ -103,7 +123,6 @@ export const EmptySubtitle = styled.p`
   font-size: 12px;
   line-height: 15px;
   text-align: center;
-  letter-spacing: -0.25px;
   color: ${theme.light.baliHai};
   margin-top: 24px;
   max-width: 220px;

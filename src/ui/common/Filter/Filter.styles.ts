@@ -15,7 +15,6 @@ export const DropdownButton = styled.button`
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
   color: ${theme.light.heading};
   cursor: pointer;
 `
@@ -43,7 +42,6 @@ export const DropdownItem = styled.div`
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
   color: #0c0e16;
 `
 

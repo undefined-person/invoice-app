@@ -1,9 +1,12 @@
 import { useState } from 'react'
 
-import { Button, Container, Filter, Title } from 'ui/common'
-import { dropdownOptions } from 'core/constants'
-import { DashboardLayout } from 'ui/layouts'
+import { dropdownOptions, resolutions } from 'core/constants'
+import { useAppDispatch, useWindowResize } from 'core/hooks'
+import { ModalType } from 'core/models'
 import { invoiceApi } from 'core/services'
+import { DashboardLayout } from 'ui/layouts'
+import { Button, Container, Filter, Title } from 'ui/common'
+import { openModal } from 'core/store/modal/modal.slice'
 
 import { InvoiceList } from './components'
 
@@ -15,14 +18,11 @@ import {
   InvoicesContainer,
   TotalInvoices,
 } from './HomePage.styles'
-import { useAppDispatch } from 'core/hooks'
-import { openModal } from 'core/store/modal/modal.slice'
-import { ModalType } from 'core/models'
 
 export const HomePage = () => {
   const [filter, setFilter] = useState<string>('')
   const dispatch = useAppDispatch()
-
+  const { width } = useWindowResize()
   const { data } = invoiceApi.useGetInvoicesQuery({ status: filter, limit: 10, offset: 0 })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +45,18 @@ export const HomePage = () => {
     dispatch(openModal({ modalType: ModalType.CREATE }))
   }
 
+  const handleTotalInvoicesText = () => {
+    if (!data?.count) {
+      return 'No invoices'
+    }
+
+    if (width > resolutions.mobile) {
+      return `There are ${data.count} total invoices`
+    }
+
+    return ` ${data.count} invoices`
+  }
+
   return (
     <DashboardLayout>
       <Container>
@@ -52,18 +64,18 @@ export const HomePage = () => {
           <ContentHeader>
             <ContentTitleBlock>
               <Title title="Invoices" size="large" />
-              <TotalInvoices>{data?.count ? `There are ${data.count} total invoices` : 'No invoices'}</TotalInvoices>
+              <TotalInvoices>{handleTotalInvoicesText()}</TotalInvoices>
             </ContentTitleBlock>
             <ContentHeaderRight>
               <Filter
                 onChange={handleChange}
-                placeholder="Filter by status"
+                placeholder={width > resolutions.mobile ? 'Filter by status' : 'Filter'}
                 type="dropdown"
                 options={dropdownOptions}
               />
               <Button type="button" color="primary" onClick={handleAddInvoice}>
                 <AddInvoice>+</AddInvoice>
-                New Invoice
+                {width > resolutions.mobile ? '  New Invoice' : 'New'}
               </Button>
             </ContentHeaderRight>
           </ContentHeader>
