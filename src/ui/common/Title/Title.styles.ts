@@ -18,7 +18,11 @@ const getFontSize = (size: string) => {
       return `
         font-size: 32px;
         line-height: 36px;
-        letter-spacing: -1px;
+
+        @media screen and (max-width: ${theme.breakpoints.tablet}) {
+          font-size: 20px;
+          line-height: 22px;
+        }
       `
     default:
       return `

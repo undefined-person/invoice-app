@@ -1,10 +1,9 @@
 import { FC, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 
-import { useAppDispatch } from 'core/hooks'
+import { useAppDispatch, useCloseModal, useWindowResize } from 'core/hooks'
 import { IInvoiceItem, IInvoiceStatus, InvoiceInfo } from 'core/models'
-import { closeModal } from 'core/store/modal/modal.slice'
-import { Title, FormInput, DateSelector, InputGroup, Label, Filter, Button, FilterOption } from 'ui/common'
+import { Title, FormInput, DateSelector, InputGroup, Label, Filter, Button, FilterOption, BackButton } from 'ui/common'
 
 import { ClientAddress, ItemList } from '../CreateModal/components'
 
@@ -18,6 +17,7 @@ import {
   EditModalButtons,
 } from '../CreateModal/CreateModal.styles'
 import { invoiceApi } from 'core/services'
+import { resolutions } from 'core/constants'
 
 const options: FilterOption[] = [
   {
@@ -46,7 +46,8 @@ export const EditModal: FC<IEditModalProps> = ({ invoice }) => {
   const [selectedDate, setSelectedDate] = useState(new Date(invoice.createdAt))
   const [items, setItems] = useState<IInvoiceItem[]>(invoice.items)
   const [paymentTerms, setPaymentTerms] = useState(options.find((option) => option.value === invoice.paymentTerms)!)
-
+  const { width } = useWindowResize()
+  const { handleCloseModal } = useCloseModal()
   const dispatch = useAppDispatch()
 
   const handleDateChange = (date: Date) => {
@@ -57,10 +58,6 @@ export const EditModal: FC<IEditModalProps> = ({ invoice }) => {
     setPaymentTerms(value)
   }
 
-  const handleCancel = () => {
-    dispatch(closeModal())
-  }
-
   const [updateInvoice] = invoiceApi.useUpdateInvoiceMutation()
 
   const {
@@ -69,7 +66,7 @@ export const EditModal: FC<IEditModalProps> = ({ invoice }) => {
     formState: { errors },
   } = useForm()
 
-  const submitForm = (data: FieldValues, invoiceStatus: IInvoiceStatus) => {
+  const submitForm = (data: FieldValues) => {
     const {
       senderStreetAddress,
       senderCity,
@@ -117,6 +114,7 @@ export const EditModal: FC<IEditModalProps> = ({ invoice }) => {
     <CreateModalWrapper>
       <CreateModalContainer>
         <CreateModalForm>
+          {width < resolutions.mobile ? <BackButton onClick={handleCloseModal} /> : null}
           <Title title={`Edit #${invoice.orderId}`} size="medium" />
           <CreateModalTitle>Bill From</CreateModalTitle>
           <ClientAddress defaultValues={invoice.senderAddress} errors={errors} register={register} type="sender" />
@@ -160,10 +158,10 @@ export const EditModal: FC<IEditModalProps> = ({ invoice }) => {
           <ItemList items={items} setItems={setItems} register={register} errors={errors} />
         </CreateModalForm>
         <EditModalButtons>
-          <Button onClick={handleCancel} color="sky">
+          <Button onClick={handleCloseModal} color="sky">
             Cancel
           </Button>
-          <Button onClick={handleSubmit((data) => submitForm(data, 'pending'))} color="primary">
+          <Button onClick={handleSubmit((data) => submitForm(data))} color="primary">
             Save Changes
           </Button>
         </EditModalButtons>

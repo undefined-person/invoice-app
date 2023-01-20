@@ -5,6 +5,7 @@ type themeOptions = {
 interface ITheme {
   light: themeOptions
   dark: themeOptions
+  breakpoints: themeOptions
 }
 
 export const theme: ITheme = {
@@ -27,4 +28,11 @@ export const theme: ITheme = {
     sky: '#F9FAFE',
   },
   dark: {},
+  breakpoints: {
+    tablet: '768px',
+    mobile: '640px',
+    desktop: '1024px',
+    desktopL: '1440px',
+    desktopXL: '1920px',
+  },
 }

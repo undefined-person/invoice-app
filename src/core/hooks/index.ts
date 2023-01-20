@@ -1,3 +1,5 @@
 export * from './useBoolean'
 export * from './useAppDispatch'
 export * from './useAppSelector'
+export * from './useWindowResize'
+export * from './useCloseModal'

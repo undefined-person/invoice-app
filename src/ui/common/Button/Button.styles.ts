@@ -30,7 +30,6 @@ export const ButtonStyles = styled.button<{
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
   background-color: ${(props) => props.backgroundColor && theme.light[props.backgroundColor]};
   cursor: pointer;
   color: ${(props) => (props.backgroundColor === 'sky' ? theme.light.shipCove : theme.light.white)};

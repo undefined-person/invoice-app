@@ -5,7 +5,7 @@ import { IInvoiceItem } from 'core/models'
 import { Input } from 'ui/common'
 import { Delete } from 'ui/icons'
 
-import { ItemContainer, ItemListBody, ItemTotal } from './ItemList.styles'
+import { ItemContainer, ItemGroup, ItemLabel, ItemListBody, ItemTotal } from './ItemList.styles'
 
 interface ItemProps {
   register: UseFormRegister<FieldValues>
@@ -26,31 +26,46 @@ export const Item: FC<ItemProps> = ({ item, errors, register, onChange, index, h
   return (
     <ItemContainer>
       <ItemListBody>
-        <Input
-          type="text"
-          id="name"
-          {...register(`name_${index}`)}
-          value={name}
-          onChange={(e) => handleInputChange(e)}
-        />
-        <Input
-          type="number"
-          id="price"
-          {...register(`price_${index}`)}
-          value={price}
-          onChange={(e) => handleInputChange(e)}
-        />
-        <Input
-          type="number"
-          id="quantity"
-          {...register(`quantity_${index}`)}
-          value={quantity}
-          onChange={(e) => handleInputChange(e)}
-        />
-        <ItemTotal>{total}</ItemTotal>
-        <button onClick={() => handleDelete(id)}>
-          <Delete />
-        </button>
+        <ItemGroup>
+          <ItemLabel>Item Name</ItemLabel>
+          <Input
+            type="text"
+            id="name"
+            {...register(`name_${index}`)}
+            value={name}
+            onChange={(e) => handleInputChange(e)}
+          />
+        </ItemGroup>
+        <ItemGroup>
+          <ItemLabel>Qty.</ItemLabel>
+          <Input
+            type="number"
+            id="quantity"
+            {...register(`quantity_${index}`)}
+            value={quantity}
+            onChange={(e) => handleInputChange(e)}
+          />
+        </ItemGroup>
+        <ItemGroup>
+          <ItemLabel>Price</ItemLabel>
+          <Input
+            type="number"
+            id="price"
+            {...register(`price_${index}`)}
+            value={price}
+            onChange={(e) => handleInputChange(e)}
+          />
+        </ItemGroup>
+        <ItemGroup>
+          <ItemLabel>Total</ItemLabel>
+          <ItemTotal>{total}</ItemTotal>
+        </ItemGroup>
+        <ItemGroup>
+          <span></span>
+          <button onClick={() => handleDelete(id)}>
+            <Delete />
+          </button>
+        </ItemGroup>
       </ItemListBody>
       {errors.name && <span>{errors.name.message}</span>}
     </ItemContainer>

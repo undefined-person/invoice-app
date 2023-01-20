@@ -17,6 +17,12 @@ export const DeleteModalWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 48px;
+
+  @media screen and (max-width: ${theme.breakpoints.mobile}) {
+    padding: 32px;
+    width: 80vw;
+    height: auto;
+  }
 `
 
 export const DeleteParagraph = styled.p`

@@ -6,7 +6,6 @@ export const InvoiceItemText = styled.div`
   font-weight: 700;
   font-size: 12px;
   line-height: 15px;
-  letter-spacing: -0.25px;
 
   &:nth-child(3),
   &:nth-child(4) {

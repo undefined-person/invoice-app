@@ -22,6 +22,10 @@ export const BaseTheme = createGlobalStyle`
     color: ${theme.light.heading};
     background-color: ${theme.light.background};
     overflow-y: hidden;
+
+    @media screen and (max-width: ${theme.breakpoints.tablet}) {
+       overflow-y: auto;
+    }
   }
 
   a {
@@ -94,7 +98,6 @@ export const BaseTheme = createGlobalStyle`
     font-weight: 700;
     font-size: 12px;
     line-height: 15px;
-    letter-spacing: -0.25px;
     width: 100%;
     color: ${theme.light.heading};
     outline: none;
@@ -116,5 +119,24 @@ export const BaseTheme = createGlobalStyle`
     font-family: 'OpenSans', sans-serif;
     font-weight: 700;
     color: ${theme.light.heading};
+  }
+
+
+  //Input
+
+  input[type="number"]::-webkit-inner-spin-button, 
+  input[type="number"]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  input[type=number] {
+    -moz-appearance:textfield;
   }
 `

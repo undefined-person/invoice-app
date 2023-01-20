@@ -1,20 +1,17 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { invoiceApi } from 'core/services'
-import { useAppDispatch } from 'core/hooks'
+import { useAppDispatch, useWindowResize } from 'core/hooks'
 import { ModalType } from 'core/models'
 import { dateFormatter } from 'core/utils'
-import { Button, Container, InvoiceStatus, Paragraph } from 'ui/common'
+import { resolutions } from 'core/constants'
+import { BackButton, Button, Container, InvoiceStatus, Paragraph } from 'ui/common'
 import { DashboardLayout } from 'ui/layouts'
 import { openModal } from 'core/store/modal/modal.slice'
-
-import Arrow from 'assets/images/icons/icon-arrow.svg'
 
 import { InvoiceGroup, InvoiceItems, InvoiceAddress } from './components'
 
 import {
-  BackArrow,
-  BackContainer,
   InvoiceClientAddress,
   InvoiceClientEmail,
   InvoiceContainer,
@@ -32,8 +29,9 @@ import {
 
 export const Invoice = () => {
   const { orderId } = useParams()
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const { width } = useWindowResize()
+  const navigate = useNavigate()
   const { data } = invoiceApi.useGetInvoiceQuery(orderId!)
   const [markAsPaid] = invoiceApi.useMarkInvoiceAsPaidMutation()
 
@@ -54,25 +52,25 @@ export const Invoice = () => {
       <Container>
         {data && (
           <InvoiceContainer>
-            <BackContainer onClick={() => navigate(-1)}>
-              <BackArrow src={Arrow} alt="Arrow" /> Go back
-            </BackContainer>
+            <BackButton onClick={() => navigate(-1)} />
             <TopContainer>
               <Status>
                 <span>Status</span>
                 <InvoiceStatus status={data.status}>{data.status}</InvoiceStatus>
               </Status>
-              <InvoiceControl>
-                <Button color="sky" disabled={data.status === 'paid'} onClick={handleEdit}>
-                  Edit
-                </Button>
-                <Button color="coral" onClick={handleDelete}>
-                  Delete
-                </Button>
-                <Button color="primary" onClick={handleMarkAsPaid} disabled={data.status === 'paid'}>
-                  Mark as Paid
-                </Button>
-              </InvoiceControl>
+              {width > resolutions.mobile ? (
+                <InvoiceControl>
+                  <Button color="sky" disabled={data.status === 'paid'} onClick={handleEdit}>
+                    Edit
+                  </Button>
+                  <Button color="coral" onClick={handleDelete}>
+                    Delete
+                  </Button>
+                  <Button color="primary" onClick={handleMarkAsPaid} disabled={data.status === 'paid'}>
+                    Mark as Paid
+                  </Button>
+                </InvoiceControl>
+              ) : null}
             </TopContainer>
             <InvoiceInfo>
               <InvoiceInfoTop>
@@ -107,6 +105,19 @@ export const Invoice = () => {
           </InvoiceContainer>
         )}
       </Container>
+      {width <= resolutions.mobile ? (
+        <InvoiceControl>
+          <Button color="sky" disabled={data?.status === 'paid'} onClick={handleEdit}>
+            Edit
+          </Button>
+          <Button color="coral" onClick={handleDelete}>
+            Delete
+          </Button>
+          <Button color="primary" onClick={handleMarkAsPaid} disabled={data?.status === 'paid'}>
+            Mark as Paid
+          </Button>
+        </InvoiceControl>
+      ) : null}
     </DashboardLayout>
   )
 }

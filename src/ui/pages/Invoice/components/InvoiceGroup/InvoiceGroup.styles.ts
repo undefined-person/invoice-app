@@ -12,6 +12,5 @@ export const InvoiceTitle = styled.h3`
   font-weight: 700;
   font-size: 15px;
   line-height: 20px;
-  letter-spacing: -0.3125px;
   color: ${theme.light.heading};
 `
