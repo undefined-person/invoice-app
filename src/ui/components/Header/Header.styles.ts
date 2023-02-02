@@ -97,6 +97,8 @@ export const UserPopup = styled.div`
   padding: 16px 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   row-gap: 8px;
+  width: min-content;
+  height: min-content;
 
   button {
     background: none;
@@ -107,5 +109,12 @@ export const UserPopup = styled.div`
     &:hover {
       color: ${theme.light.primary};
     }
+  }
+
+  @media screen and (max-width: ${theme.breakpoints.tablet}) {
+    bottom: -300px;
+    top: 0;
+    right: 0;
+    left: -30px;
   }
 `

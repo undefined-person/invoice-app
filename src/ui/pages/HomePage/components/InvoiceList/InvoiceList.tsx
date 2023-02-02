@@ -9,7 +9,7 @@ import IllustrationEmpty from 'assets/images/illustration-empty.svg'
 import { EmptyContainer, EmptySubtitle, EmptyTitle, InvoicesList } from './InvoiceList.styles'
 
 interface InvoiceListProps {
-  invoices: IInvoiceListItem[]
+  invoices: IInvoiceListItem[] | undefined
 }
 
 export const InvoiceList: FC<InvoiceListProps> = ({ invoices }) => {

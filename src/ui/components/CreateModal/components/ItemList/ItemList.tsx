@@ -2,7 +2,6 @@ import { FC } from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
 
 import { IInvoiceItem } from 'core/models'
-import { generateId } from 'core/utils'
 import { Button, Title } from 'ui/common'
 
 import { Item } from './Item'
@@ -17,27 +16,22 @@ interface ItemListProps {
 }
 
 export const ItemList: FC<ItemListProps> = ({ items, setItems, register, errors }) => {
-  const handleItemChange = (id: string, updatedItem: IInvoiceItem) => {
+  const handleItemChange = (index: number, updatedItem: IInvoiceItem) => {
     const total = updatedItem.price * updatedItem.quantity
     const updatedItemWithTotal = { ...updatedItem, total }
 
-    setItems((prevItems: IInvoiceItem[]) => {
-      // Find the index of the item in the array
-      const index = prevItems.findIndex((item) => item.id === id)
-      // Create a new array with the updated item
-      const newItems = [...prevItems]
-      newItems[index] = updatedItemWithTotal
-      return newItems
-    })
+    const newItems = [...items]
+    newItems[index] = updatedItemWithTotal
+
+    setItems(newItems)
   }
 
   const handleAddItem = () => {
-    const id = generateId()
-    setItems([...items, { id, name: '', price: 0, quantity: 0, total: 0 }])
+    setItems([...items, { name: '', price: 0, quantity: 0, total: 0 }])
   }
 
-  const handleDeleteItem = (id: string) => {
-    setItems(items.filter((item) => item.id !== id))
+  const handleDeleteItem = (itemIndex: number) => {
+    setItems(items.filter((_, index) => index !== itemIndex))
   }
 
   return (

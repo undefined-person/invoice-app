@@ -5,7 +5,7 @@ import { useAppDispatch, useWindowResize } from 'core/hooks'
 import { ModalType } from 'core/models'
 import { invoiceApi } from 'core/services'
 import { DashboardLayout } from 'ui/layouts'
-import { Button, Container, Filter, Title } from 'ui/common'
+import { Button, CheckboxGroup, Container, Title } from 'ui/common'
 import { openModal } from 'core/store/modal/modal.slice'
 
 import { InvoiceList } from './components'
@@ -67,10 +67,9 @@ export const HomePage = () => {
               <TotalInvoices>{handleTotalInvoicesText()}</TotalInvoices>
             </ContentTitleBlock>
             <ContentHeaderRight>
-              <Filter
+              <CheckboxGroup
                 onChange={handleChange}
                 placeholder={width > resolutions.mobile ? 'Filter by status' : 'Filter'}
-                type="dropdown"
                 options={dropdownOptions}
               />
               <Button type="button" color="primary" onClick={handleAddInvoice}>

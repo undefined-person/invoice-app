@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 
-import { IInvoiceItem, IInvoiceStatus } from 'core/models'
-import { generateId } from 'core/utils'
+import { IInvoiceItem, IInvoiceStatus, InvoiceDto } from 'core/models'
 import { invoiceApi } from 'core/services'
-import { BackButton, Button, DateSelector, Filter, FilterOption, FormInput, InputGroup, Label, Title } from 'ui/common'
+import { useCloseModal, useWindowResize } from 'core/hooks'
+import { IPaymentTermsData, paymentTermsData, resolutions } from 'core/constants'
+import { BackButton, Button, DateSelector, FormInput, InputGroup, Label, Select, Title } from 'ui/common'
 
 import { ClientAddress, ItemList } from './components'
 
@@ -18,33 +19,11 @@ import {
   CreateModalWrapper,
   DateContainer,
 } from './CreateModal.styles'
-import { useAppDispatch, useCloseModal, useWindowResize } from 'core/hooks'
-import { resolutions } from 'core/constants'
-import { closeModal } from 'core/store/modal/modal.slice'
-
-const options: FilterOption[] = [
-  {
-    label: 'Net 1 Day',
-    value: 1,
-  },
-  {
-    label: 'Net 7 Day',
-    value: 7,
-  },
-  {
-    label: 'Net 14 Day',
-    value: 14,
-  },
-  {
-    label: 'Net 30 Day',
-    value: 30,
-  },
-]
 
 export const CreateModal = () => {
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const [items, setItems] = useState<IInvoiceItem[]>([{ id: generateId(), name: '', price: 0, quantity: 0, total: 0 }])
-  const [paymentTerms, setPaymentTerms] = useState(options[0])
+  const [items, setItems] = useState<IInvoiceItem[]>([{ name: '', price: 0, quantity: 0, total: 0 }])
+  const [paymentTerms, setPaymentTerms] = useState(paymentTermsData[0])
   const { width } = useWindowResize()
   const { handleCloseModal } = useCloseModal()
 
@@ -55,8 +34,8 @@ export const CreateModal = () => {
     setSelectedDate(date)
   }
 
-  const handlePaymentTermsChange = (value: FilterOption) => {
-    setPaymentTerms(value)
+  const handlePaymentTermsChange = (newValue: IPaymentTermsData) => {
+    setPaymentTerms(newValue)
   }
 
   const {
@@ -108,17 +87,16 @@ export const CreateModal = () => {
     }
 
     if (invoiceStatus === 'draft') {
-      draftInvoice(payload)
-      return
+      draftInvoice(payload as InvoiceDto)
     } else {
-      createInvoice(payload)
+      createInvoice(payload as InvoiceDto)
     }
   }
 
   const handleReset = () => {
     reset()
-    setItems([{ id: generateId(), name: '', price: 0, quantity: 0, total: 0 }])
-    setPaymentTerms(options[0])
+    setItems([{ name: '', price: 0, quantity: 0, total: 0 }])
+    setPaymentTerms(paymentTermsData[0])
   }
 
   return (
@@ -140,7 +118,7 @@ export const CreateModal = () => {
               <DateSelector label="Invoice Date" onDateChange={handleDateChange} />
               <InputGroup>
                 <Label>Payment Terms</Label>
-                <Filter type="select" options={options} onChange={handlePaymentTermsChange} value={paymentTerms} />
+                <Select options={paymentTermsData} onChange={handlePaymentTermsChange} value={paymentTerms} />
               </InputGroup>
             </DateContainer>
             <FormInput type="text" name="description" label="Project Description" register={register} errors={errors} />

@@ -40,7 +40,9 @@ export const Invoice = () => {
   }
 
   const handleMarkAsPaid = () => {
-    markAsPaid(data.id)
+    if (data) {
+      markAsPaid(data.id)
+    }
   }
 
   const handleEdit = () => {

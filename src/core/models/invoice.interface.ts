@@ -28,7 +28,6 @@ export interface IClientAddress {
 }
 
 export interface IInvoiceItem {
-  id: string
   name: string
   price: number
   total: number
@@ -38,7 +37,7 @@ export interface IInvoiceItem {
 export interface InvoiceInfo {
   id: number
   orderId: string
-  createdAt: Date
+  createdAt: string
   paymentDue: Date
   description: string
   paymentTerms: number
@@ -48,9 +47,9 @@ export interface InvoiceInfo {
   senderAddress: IClientAddress
   clientAddress: IClientAddress
   items: IInvoiceItem[]
-  total: string
+  total: number
 }
 
-type InvoiceInfoUnwantedKeys = 'id' | 'orderId' | 'paymentDue'
+type InvoiceInfoUnwantedKeys = 'orderId' | 'paymentDue'
 
 export type InvoiceDto = Omit<InvoiceInfo, InvoiceInfoUnwantedKeys>

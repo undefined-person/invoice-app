@@ -1,9 +1,11 @@
 import { FC, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 
-import { useAppDispatch, useCloseModal, useWindowResize } from 'core/hooks'
-import { IInvoiceItem, IInvoiceStatus, InvoiceInfo } from 'core/models'
-import { Title, FormInput, DateSelector, InputGroup, Label, Filter, Button, FilterOption, BackButton } from 'ui/common'
+import { useCloseModal, useWindowResize } from 'core/hooks'
+import { IInvoiceItem, InvoiceDto, InvoiceInfo } from 'core/models'
+import { invoiceApi } from 'core/services'
+import { IPaymentTermsData, paymentTermsData, resolutions } from 'core/constants'
+import { Title, FormInput, DateSelector, InputGroup, Label, Button, BackButton, Select } from 'ui/common'
 
 import { ClientAddress, ItemList } from '../CreateModal/components'
 
@@ -16,27 +18,6 @@ import {
   DateContainer,
   EditModalButtons,
 } from '../CreateModal/CreateModal.styles'
-import { invoiceApi } from 'core/services'
-import { resolutions } from 'core/constants'
-
-const options: FilterOption[] = [
-  {
-    label: 'Net 1 Day',
-    value: 1,
-  },
-  {
-    label: 'Net 7 Day',
-    value: 7,
-  },
-  {
-    label: 'Net 14 Day',
-    value: 14,
-  },
-  {
-    label: 'Net 30 Day',
-    value: 30,
-  },
-]
 
 interface IEditModalProps {
   invoice: InvoiceInfo
@@ -45,16 +26,17 @@ interface IEditModalProps {
 export const EditModal: FC<IEditModalProps> = ({ invoice }) => {
   const [selectedDate, setSelectedDate] = useState(new Date(invoice.createdAt))
   const [items, setItems] = useState<IInvoiceItem[]>(invoice.items)
-  const [paymentTerms, setPaymentTerms] = useState(options.find((option) => option.value === invoice.paymentTerms)!)
+  const [paymentTerms, setPaymentTerms] = useState(
+    paymentTermsData.find((option) => option.value === invoice.paymentTerms)!
+  )
   const { width } = useWindowResize()
   const { handleCloseModal } = useCloseModal()
-  const dispatch = useAppDispatch()
 
   const handleDateChange = (date: Date) => {
     setSelectedDate(date)
   }
 
-  const handlePaymentTermsChange = (value: FilterOption) => {
+  const handlePaymentTermsChange = (value: IPaymentTermsData) => {
     setPaymentTerms(value)
   }
 
@@ -107,7 +89,7 @@ export const EditModal: FC<IEditModalProps> = ({ invoice }) => {
       total: itemsData.reduce((acc, item) => acc + item.total, 0),
     }
 
-    updateInvoice(payload)
+    updateInvoice(payload as InvoiceDto)
   }
 
   return (
@@ -143,7 +125,7 @@ export const EditModal: FC<IEditModalProps> = ({ invoice }) => {
               <DateSelector defaultValue={selectedDate} label="Invoice Date" onDateChange={handleDateChange} />
               <InputGroup>
                 <Label>Payment Terms</Label>
-                <Filter type="select" options={options} onChange={handlePaymentTermsChange} value={paymentTerms} />
+                <Select options={paymentTermsData} onChange={handlePaymentTermsChange} value={paymentTerms} />
               </InputGroup>
             </DateContainer>
             <FormInput

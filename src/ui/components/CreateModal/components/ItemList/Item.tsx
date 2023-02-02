@@ -11,16 +11,16 @@ interface ItemProps {
   register: UseFormRegister<FieldValues>
   errors: FieldValues
   item: IInvoiceItem
-  onChange: (id: string, item: IInvoiceItem) => void
+  onChange: (index: number, item: IInvoiceItem) => void
   index: number
-  handleDelete: (id: string) => void
+  handleDelete: (index: number) => void
 }
 
 export const Item: FC<ItemProps> = ({ item, errors, register, onChange, index, handleDelete }) => {
-  const { name, price, quantity, total, id } = item
+  const { name, price, quantity, total } = item
   const handleInputChange = (event: any) => {
     // Update the item in the `items` state
-    onChange(id, { ...item, [event.target.id]: event.target.value })
+    onChange(index, { ...item, [event.target.id]: event.target.value })
   }
 
   return (
@@ -62,7 +62,7 @@ export const Item: FC<ItemProps> = ({ item, errors, register, onChange, index, h
         </ItemGroup>
         <ItemGroup>
           <span></span>
-          <button onClick={() => handleDelete(id)}>
+          <button type="button" onClick={() => handleDelete(index)}>
             <Delete />
           </button>
         </ItemGroup>

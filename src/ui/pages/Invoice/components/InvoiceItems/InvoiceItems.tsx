@@ -18,7 +18,7 @@ import {
 
 interface InvoiceItemsProps {
   invoiceItems: IInvoiceItem[]
-  total: string
+  total: number
 }
 
 export const InvoiceItems: FC<InvoiceItemsProps> = ({ invoiceItems, total }) => {
